@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 flex items-center justify-center p-6">
+    <div id="app" class="w-full max-w-md rounded-2xl bg-white/10 backdrop-blur-md shadow-2xl p-8 text-center text-white">
+        <h1 class="text-2xl font-semibold mb-3">{{ message }}</h1>
+        <p class="text-5xl font-bold mb-6">Count: {{ count }}</p>
+        <div class="flex flex-wrap justify-center gap-3">
+            <button @click="increment" class="rounded-lg bg-emerald-500 px-4 py-2 font-medium text-white hover:bg-emerald-600 transition">Increment Count</button>
+            <button @click="decrement" class="rounded-lg bg-rose-500 px-4 py-2 font-medium text-white hover:bg-rose-600 transition">Decrement Count</button>
+            <button @click="reset" class="rounded-lg bg-sky-500 px-4 py-2 font-medium text-white hover:bg-sky-600 transition">Reset Count</button>
+        </div>
+    </div>
+    <script>
+        const { createApp, ref } = Vue;
+        createApp({
+            setup() {
+                const message = ref('Hello Vue 3!');
+                const count = ref(0);
+
+                const increment = () => {
+                    count.value++;
+                    if (count.value === 5) {
+                        message.value = 'Count reached 5!';
+                    }
+                };
+
+                const decrement = () => {
+                    count.value--;
+                    if (count.value < 0) {
+                        message.value = 'Count is negative!';
+                    }
+                };
+
+                const reset = () => {
+                    count.value = 0;
+                    message.value = 'Count reset to 0!';
+                };
+
+                return { message, count, increment, decrement, reset };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
